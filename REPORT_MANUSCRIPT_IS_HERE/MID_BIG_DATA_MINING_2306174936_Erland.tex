@@ -32,6 +32,7 @@
 \usepackage{graphicx}% Include figure files
 \usepackage{dcolumn}% Align table columns on decimal point
 \usepackage{bm}% bold math
+\usepackage{booktabs}
 %\usepackage[mathlines]{lineno}% Enable numbering of text and display math
 %\linenumbers\relax % Commence numbering lines
 
@@ -39,7 +40,7 @@
 
 \preprint{AIP/123-QED}
 
-\title[Paper Reproduction]
+\title[Midterm Project]
 {Robust Representation and Efficient Feature
 Selection Allows for Effective Clustering of SARS-CoV-2
 Variants:\\
@@ -73,7 +74,7 @@ Universitas Indonesia%\\This line break forced with \textbackslash\textbackslash
     and mutations, this paper focuses on clustering spike protein sequences, crucial for
     understanding variant behavior. Utilizing a k-mers based approach, the original author of the paper
     create a fixed-length feature vector for spike sequences. The proposed feature selection
-    method enables efficient clustering of spike sequences, demonstrating higher F1 scores
+    method enables efficient clustering of spike sequences, demonstrating higher $F_1$ scores
     for clusters in both hard and soft clustering methods.
 \end{abstract}
 
@@ -183,30 +184,84 @@ to the class label) and only keep the features that are above a specific thresho
 defined as the highest feature importance recorded among the shadow features.
 
 \subsection{Clustering Methods}
-Dalam artikel penelitian yang direproduksi hasilnya ini, digunakan lima metode \emph{clustering} yang berbeda (baik \emph{hard} maupun \emph{soft clustering}) yaitu
-\emph{k-means} \cite{ref49}, \emph{k-modes} \cite{ref50}, \emph{Fuzzy c-means} \cite{ref51, ref52}, \emph{agglomerative hierarchical clustering}, dan
-\emph{spatial clustering} pada penerapan dengan \emph{noise} berbasis \emph{Hierarchical density} (HDBSCAN) \cite{ref53, ref54} (dicatat bahwa metode ini
-merupakan \emph{soft clustering}). Untuk \emph{k-means} dan \emph{k-modes}, parameter \emph{default} digunakan. Untuk \emph{Fuzzy c-means}, kriteria
-\emph{clustering} yang digunakan untuk mengagregat subset adlaah fungsi objektif \emph{generalized least-squares}. Untuk \emph{agglomerative hierarchical clustering},
-pendekatan \emph{bottom-up} diterapkan, yang mana diakui sebagai metode \emph{agglomerative}. Oleh karena prosedur \emph{bottom-up} dimulai dari manapun di
-titik pusat dari hierarki dan bagian bawah hierarki dikembangkan dengan metode yang lebih ringan seperti \emph{partitional clustering}, biaya komputasi dapat ditekan.
+In the original work, five different clustering methods (both hard and soft clustering approaches) namely k-means\cite{ref49}, k-modes\cite{ref50}, Fuzzy
+c-means\cite{ref51,ref52}, agglomerative hierarchical clustering, and Hierarchical density-based spatial clustering of applications with noise (HDBSCAN)\cite{ref53,ref54}
+(note that is is a soft clustering approach). For the k-means and k-modes, default parameters are used. For the fuzzy c-means, the clustering criterion used to aggregate
+subsets is a generalized least-squares objective function. For agglomerative hierarchical clustering, a bottom-up approach is applied, which is acknowledged as the
+agglomerative method. Since the bottom-up procedure starts from anywhere in the central point of the hierarchy and the lower part of the hierarchy is developed by a
+less expensive method such as partitional clustering, it can reduce the computational cost \cite{ref55}.
 
-HDBSCAN tidak hanya \emph{spatial clustering} pada aplikasi dengan \emph{noise} berbasis \emph{density} tetapi memindahkannya pada algoritma \emph{hierarchical clustering}
-dan kemudian diperoleh \emph{flat clustering} berdasarkan kepadatan \emph{cluster}. HDBSCAN tidak banyak dipengaruhi oleh pemilihan parameter dan dapat menemukan
-\emph{cluster} dari kerapatan yang berbeda \cite{ref54}.
+HDBSCAN is not just density-based spatial clustering of applications with noise (DBSCAN) but switching it into a hierarchical clustering algorithm and then obtaining
+a flat clustering based in the solidity of clusters. HDBSCAN is robust to parameter choice and can discover clusters of differing densities (unlike DBSCAN)\cite{ref54}.
 
 \section{Experimental Setup and Data Preparation}
-Dalam reproduksi artikel ilmiah ini, penulis hanya menerapkan empat metode clustering yaitu \emph{k-means}, \emph{k-modes}, \emph{Fuzzy c-means}, dan HDBSCAN.
-\emph{Agglomerative hierarchical clustering} tidak dilakukan karena program dalam bahasa pemograman python yang saat ini tersedia tidak didukung dengan
-kemampuan paralelisasi yang mengakibatkan waktu eksekusi metode yang sangat lama, terutama pada ukuran data berdimensi tinggi, contohnya sekuens genom maupun
-\emph{fixed-length feature vector representation}. Selain \emph{k-means}, pada metode \emph{clustering} lainnya hanya diberikan \emph{low dimensional
-representation} dari data asli mengingat dimensi data input yang tinggi yang mengakibatkan eksekusi metode dijalankan sangat lama. $F_1$ \emph{score} digunakan
-untuk mengukur kualitas algoritma \emph{clustering}. Eksperimen dilakukan pada sistem Core i7  dengan sistem operasi MacOS, memori 16GB, dan prosesor 1.7 GHz.
-Implementasi algoritma dilakukan dalam Python, dan kode tersedia di \url{https://github.com/erland-ramadhan/sars-cov2-variants-results-reproduction.git}.
+In this paper reproduction, the author utilizes only three clustering methods—k-means, k-modes, and Fuzzy c-means.
+HDBSCAN and agglomerative clustering are omitted due to their lack of parallelization, resulting in prolonged runtime
+execution, particularly for high-dimensional data such as genome sequences or fixed-length feature vector representations
+derived from raw data. For all clustering methods except k-means, the input data consists of low-dimensional
+representations obtained from processing the raw data. This approach is adopted to address the extended runtime
+execution associated with high-dimensional raw data input. The quality of the clustering algorithms is assessed using
+the $F_1$ score. The experiments are conducted on a Core i7 system with a MacOS operating system, 16GB of memory, and a
+1.7GHz processor. The algorithm is implemented in Python, and the code is accessible at
+\url{https://github.com/erland-ramadhan/sars-cov2-variants-results-reproduction.git}.
 
-\section{Hasil Penelitian dan Pembahasan}
-
-\section{Kesimpulan}
+\section{Results and Discussion}
+\begin{table}[htbp]
+    \centering
+    \caption{Variant-wise $F_1$ (weighted) score for different clustering methods. (Reproduction work)}
+    \begin{tabular}{lccccc}
+        % \hrule
+        \toprule
+        & \multicolumn{5}{c}{$F_1$ Score (Weighted) for Different Variants}\\
+        \cmidrule{2-6}
+        Methods & Alpha & Beta & Delta & Gamma & Epsilon \\
+        \midrule
+        \midrule
+        K-Means            & 0.182 & 0.314 & 0.426 & 0.897 & 0.355\\
+        K-Means + Boruta   & 0.182 & 0.314 & 0.423 & 0.897 & 0.355\\
+        K-Means + Lasso    & 0.987 & 0.998 & 0.997 & 0.999 & 0.997\\ 
+        K-Means + RFF      & 0.917 & 0.0 & 0.0 & 0.659 & 0.320\\ 
+        \midrule
+        K-Modes + Boruta   & 0.899 & 0.761 & 0.689 & 0.977 & 0.933\\
+        K-Modes + Lasso    & 0.994 & 0.970 & 0.997 & 0.999 & 0.995\\ 
+        K-Modes + RFF      & 0.178 & 0.0 & 0.0 & 0.981 & 0.320\\ 
+        \midrule
+        Fuzzy + Boruta   & 0.186 & 0.316 & 0.414 & 0.897 & 0.356\\
+        Fuzzy + Lasso    & 0.976 & 0.998 & 0.985 & 0.997 & 0.972\\ 
+        Fuzzy + RFF      & 1.0 & 0.0 & 0.0 & 0.659 & 0.0\\ 
+        \bottomrule
+    \end{tabular}
+    \label{tab:tab1}
+\end{table}
+\begin{table}[htbp]
+    \centering
+    \caption{Variant-wise $F_1$ (weighted) score for different clustering methods. (Original work)}
+    \begin{tabular}{lccccc}
+        % \hrule
+        \toprule
+        & \multicolumn{5}{c}{$F_1$ Score (Weighted) for Different Variants}\\
+        \cmidrule{2-6}
+        Methods & Alpha & Beta & Delta & Gamma & Epsilon \\
+        \midrule
+        \midrule
+        K-Means            & 0.359 & 0.157 & 0.611 & 0.690 & 0.443\\
+        K-Means + Boruta   & 0.418 & 0.105 & 0.610 & 0.690 & 0.652\\
+        K-Means + Lasso    & 0.999 & 0.007 & 0.840 & 0.999 & 0.774\\ 
+        K-Means + RFF      & 1.0 & 0.0 & 0.288 & 1.0 & 1.0\\ 
+        \midrule
+        K-Modes + Boruta   & 0.999 & 0.316 & 0.860 & 0.999 & 0.857\\
+        K-Modes + Lasso    & 0.999 & 0.173 & 0.917 & 0.998 & 0.076\\ 
+        K-Modes + RFF      & 1.0 & 0.0 & 0.0 & 0.613 & 1.0\\ 
+        \midrule
+        Fuzzy + Boruta   & 0.357 & 0.154 & 0.613 & 0.690 & 0.443\\
+        Fuzzy + Lasso    & 0.999 & 0.314 & 0.647 & 0.999 & 0.816\\ 
+        Fuzzy + RFF      & 0.439 & 0.0 & 0.0 & 1.0 & 0.0\\ 
+        \bottomrule
+    \end{tabular}
+    \label{tab:tab2}
+\end{table}
+\subsection{Contingency Table}
+\subsection{Runtime Comparison}
 
 \nocite{*}
 % \bibliographystyle{plain}
