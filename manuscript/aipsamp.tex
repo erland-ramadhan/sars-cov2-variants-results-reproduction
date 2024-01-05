@@ -1,0 +1,217 @@
+% ****** Start of file aipsamp.tex ******
+%
+%   This file is part of the AIP files in the AIP distribution for REVTeX 4.
+%   Version 4.2a of REVTeX, December 2014
+%
+%   Copyright (c) 2014 American Institute of Physics.
+%
+%   See the AIP README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.2
+%
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex  aipsamp
+%  2)  bibtex aipsamp
+%  3)  latex  aipsamp
+%  4)  latex  aipsamp
+%
+% Use this file as a source of example code for your aip document.
+% Use the file aiptemplate.tex as a template for your document.
+\documentclass[%
+ aip,
+ jmp,%
+ amsmath,amssymb,
+%preprint,%
+ reprint,%
+%author-year,%
+%author-numerical,%
+]{revtex4-2}
+
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+
+\begin{document}
+
+\preprint{AIP/123-QED}
+
+\title[Paper Reproduction]
+{Robust Representation and Efficient Feature
+Selection Allows for Effective Clustering of SARS-CoV-2
+Variants:\\
+Paper Reproduction dan Improvements\footnote{Error!}}% Force line breaks with \\
+% \thanks{Footnote to title of article.}
+
+\author{Erland Rachmad Ramadhan}
+ % \altaffiliation[Also at ]{Physics Department, XYZ University.}%Lines break automatically or can be forced with \\
+% \author{B. Author}%
+ \email{mwkerr1916@icloud.com}
+\affiliation{ 
+Master Program of Mathematics, Department of Mathematics,\\
+Faculty of Mathematics and Natural Science,\\
+Universitas Indonesia%\\This line break forced with \textbackslash\textbackslash
+}%
+
+% \author{C. Author}
+ % \homepage{http://www.Second.institution.edu/~Charlie.Author.}
+% \affiliation{%
+% Second institution and/or address%\\This line break forced% with \\
+% }%
+
+\date{4 November 2023}% It is always \today, today,
+             %  but any date may be explicitly specified
+
+\begin{abstract}
+    The COVID-19 pandemic has led to an abundance of genomic data on the SARS-CoV-2 virus,
+    presenting a unique opportunity for detailed analysis. This research benefits biologists,
+    policymakers, and authorities in making informed decisions to control virus spread and
+    prepares for future pandemics. Despite the challenge posed by the virus's diverse variants
+    and mutations, this paper focuses on clustering spike protein sequences, crucial for
+    understanding variant behavior. Utilizing a k-mers based approach, the original author of the paper
+    create a fixed-length feature vector for spike sequences. The proposed feature selection
+    method enables efficient clustering of spike sequences, demonstrating higher F1 scores
+    for clusters in both hard and soft clustering methods.
+\end{abstract}
+
+\keywords{COVID-19; SARS-CoV-2; Spike Protein Sequences;
+Clustering Analysis; Feature Selection; k-mers}%Use showkeys class option if keyword
+                              %display desired
+\maketitle
+
+%\begin{quotation}
+%The ``lead paragraph'' is encapsulated with the \LaTeX\ 
+%\verb+quotation+ environment and is formatted as a single paragraph before the first section heading. 
+%(The \verb+quotation+ environment reverts to its usual meaning after the first sectioning command.) 
+%Note that numbered references are allowed in the lead paragraph.
+%%
+%The lead paragraph will only be found in an article being prepared for the journal \textit{Chaos}.
+%\end{quotation}
+
+% \section{\label{sec:level1}First-level heading:\protect\\ The line
+% break was forced \lowercase{via} \textbackslash\textbackslash}
+
+\section{Introduction}
+The SARS-CoV-2 virus, responsible for COVID-19, has a rapidly spreading genomic sequence worldwide.
+This genetic information is crucial for understanding outbreak dynamics, designing analyses, drugs,
+and vaccines, and monitoring changes in viral effectiveness over time. The virus's spike protein,
+particularly its S region, plays a key role in infection and exhibits significant genomic variation.
+To efficiently analyze this variation, the original author of the paper propose a focus on amino acid sequences
+encoded by the spike region using machine learning and clustering methods \cite{ref1}. By converting these sequences
+into numeric vectors through k-mers, the original author of the paper aim to reduce data dimensionality and enhance
+analysis efficiency. The proposed approach integrates feature selection and clustering to gain insights
+into the virus's evolutionary dynamics, overcoming challenges posed by the vast number of available genomic
+sequences. The significance of the S protein makes it a potential target for therapeutic interventions and
+vaccine development. The methodology proposed ensures meaningful analytics, laying the foundation for effective
+strategies to combat the COVID-19 pandemic.
+
+\section{Algorithms}
+In this section, the proposed algorithm is discussed in detail. The discussion start with the
+description of $k$-mers generation from the spike sequences. Then, the generation of
+feature vector representation from the $k$-mers information will be described. After that,
+discussion on different feature selection methods will be given in detail. Finally, the
+detail of the application of clustering approaches on the final feature vector represetation
+will be explained.
+
+\subsection{k-mers Generation}
+Given a spike sequence, the first step is to compute all possible $k$-mers. The total number of $k$-mers
+that can be generated for a spike sequence are described as follows.
+\begin{equation}
+    N - k + 1
+\end{equation}
+where $N$ is the length of the spike sequence ($N=1274$ for this paper dataset). The variable $k$ is a
+user-defined parameter ($k=3$ is chosen using standard validation set approach \cite{ref42}).
+
+\subsection{Fixed-Length Feature Vector Generation}
+Since most of the Machine Learning (ML) models work with a fixed-length feature vector representation,
+the $k$-mers information is needed to be converted into the vectors. For this purpose, a feature vector
+$\Phi_k$ is generated for a given spike sequence $a$ (i.e., $\Phi_k(a)$). Given an alphabet $\Sigma$
+(characters representing amino acids in the spike sequences), the length of $\Phi_k(a)$ will be equal to
+the number of possible $k$-mers of $a$. More formally,
+\begin{equation}
+    \Phi_k(a)=|\Sigma|^k
+\end{equation}
+
+Since there are 21 unique characters in $\Sigma$ (namely \emph{ACDEFGHIKLMNPQRSTVWXY}), the length
+of each frequency vector is $21^3=9261$.
+
+\subsection{Low Dimensional Representation}
+Since the dimensionality of data is high after getting the fixed length feature vector representation,
+different supervised and unsupervised methods is applied to obtain a low dimensional representation of
+data to avoid the problem of the \emph{curse of dimensionality} \cite{ref35, ref43}. Each of the methods for
+obtaining a low dimensional representation of data is discussed below:
+
+\subsubsection{Random Fourier Features}
+The first method that is used is an approximate kernel method called Random Fourier Features (RFF) \cite{ref44}.
+It is an unsupervised approach, which maps the input data to a randomized low dimensional feature space
+(euclidean inner product space) to get an approximate representation of data in lower dimensions $D$ from the
+original dimensions $d$. More formally:
+\begin{equation}
+    z:\mathbb{R}^d\rightarrow\mathbb{R}^D
+\end{equation}
+In this way, the inner product between a pair of transformed points is approximated. More formally:
+\begin{equation}
+    f(x,y)=\langle\phi(x),\phi(y)\rangle\approx z(x)'z(y)
+    \label{eq:eq4}
+\end{equation}
+In Equation \ref{eq:eq4}, $z$ is low dimensional (unlike the lifting $\phi$). Now, $z$ acts as the
+approximate low dimensional embedding for the original data. Then, $z$ can be used as an input for
+different ML tasks like clustering and classification.
+
+\subsubsection{Least Absolute Shrinkage and Selection Operator (Lasso) Regression}
+Lasso regression is a supervised method that can be used for efficient feature selection. It is a type of
+regularized linear regression variants. It is a specific case of the penalized least squares regression with
+an $L_1$ penalty function. By combining the good qualities of ridge regression \cite{ref45, ref46} and subset
+selection, Lasso can improve both model interpretability and prediction accuracy \cite{ref47}. Lasso regression
+tries to minimize the following objective function:
+\begin{equation}
+    \min(\text{Sum of square residuals} + \alpha\times|\text{slope}|)
+\end{equation}
+where $\alpha\times|\text{slope}|$ is the penalty term. In Lasso regression, the absolute value of the slope is
+chosen in the penalty term rather than the square (as in ridge regression \cite{ref46}). This helps to reduce the
+slope of useless variables exactly equal to zero.
+
+\subsubsection{Boruta}
+The last feature selection method that is used is Boruta. It is a supervised method that is made all around the
+random forest (RF) classification algorithm. It works by creating shadow features so that the features do not compete
+among themselves but rather they compete with a randomized version of them \cite{ref48}. It captures the non-linear
+relationships and interactions using the RF algorithm. It then extract the importance of each feature (corresponding
+to the class label) and only keep the features that are above a specific threshold of importance. The threshold is
+defined as the highest feature importance recorded among the shadow features.
+
+\subsection{Clustering Methods}
+Dalam artikel penelitian yang direproduksi hasilnya ini, digunakan lima metode \emph{clustering} yang berbeda (baik \emph{hard} maupun \emph{soft clustering}) yaitu
+\emph{k-means} \cite{ref49}, \emph{k-modes} \cite{ref50}, \emph{Fuzzy c-means} \cite{ref51, ref52}, \emph{agglomerative hierarchical clustering}, dan
+\emph{spatial clustering} pada penerapan dengan \emph{noise} berbasis \emph{Hierarchical density} (HDBSCAN) \cite{ref53, ref54} (dicatat bahwa metode ini
+merupakan \emph{soft clustering}). Untuk \emph{k-means} dan \emph{k-modes}, parameter \emph{default} digunakan. Untuk \emph{Fuzzy c-means}, kriteria
+\emph{clustering} yang digunakan untuk mengagregat subset adlaah fungsi objektif \emph{generalized least-squares}. Untuk \emph{agglomerative hierarchical clustering},
+pendekatan \emph{bottom-up} diterapkan, yang mana diakui sebagai metode \emph{agglomerative}. Oleh karena prosedur \emph{bottom-up} dimulai dari manapun di
+titik pusat dari hierarki dan bagian bawah hierarki dikembangkan dengan metode yang lebih ringan seperti \emph{partitional clustering}, biaya komputasi dapat ditekan.
+
+HDBSCAN tidak hanya \emph{spatial clustering} pada aplikasi dengan \emph{noise} berbasis \emph{density} tetapi memindahkannya pada algoritma \emph{hierarchical clustering}
+dan kemudian diperoleh \emph{flat clustering} berdasarkan kepadatan \emph{cluster}. HDBSCAN tidak banyak dipengaruhi oleh pemilihan parameter dan dapat menemukan
+\emph{cluster} dari kerapatan yang berbeda \cite{ref54}.
+
+\section{Experimental Setup and Data Preparation}
+Dalam reproduksi artikel ilmiah ini, penulis hanya menerapkan empat metode clustering yaitu \emph{k-means}, \emph{k-modes}, \emph{Fuzzy c-means}, dan HDBSCAN.
+\emph{Agglomerative hierarchical clustering} tidak dilakukan karena program dalam bahasa pemograman python yang saat ini tersedia tidak didukung dengan
+kemampuan paralelisasi yang mengakibatkan waktu eksekusi metode yang sangat lama, terutama pada ukuran data berdimensi tinggi, contohnya sekuens genom maupun
+\emph{fixed-length feature vector representation}. Selain \emph{k-means}, pada metode \emph{clustering} lainnya hanya diberikan \emph{low dimensional
+representation} dari data asli mengingat dimensi data input yang tinggi yang mengakibatkan eksekusi metode dijalankan sangat lama. $F_1$ \emph{score} digunakan
+untuk mengukur kualitas algoritma \emph{clustering}. Eksperimen dilakukan pada sistem Core i7  dengan sistem operasi MacOS, memori 16GB, dan prosesor 1.7 GHz.
+Implementasi algoritma dilakukan dalam Python, dan kode tersedia di \url{https://github.com/erland-ramadhan/sars-cov2-variants-results-reproduction.git}.
+
+\section{Hasil Penelitian dan Pembahasan}
+
+\section{Kesimpulan}
+
+\nocite{*}
+% \bibliographystyle{plain}
+\bibliography{aipsamp}% Produces the bibliography via BibTeX.
+
+\end{document}
+%
+% ****** End of file aipsamp.tex ******
