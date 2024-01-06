@@ -206,7 +206,18 @@ the $F_1$ score. The experiments are conducted on a Core i7 system with a MacOS 
 \url{https://github.com/erland-ramadhan/sars-cov2-variants-results-reproduction.git}.
 
 \section{Results and Discussion}
-\begin{table}[htbp]
+\subsection{$F_1$ score}
+The clustering quality was assessed using the weighted $F_1$ score. As cluster labels were unavailable,
+each cluster was assigned a label based on the variant that had the majority of its sequences (e.g.,
+assigning the label 'Alpha' to a cluster if most sequences belonged to the Alpha variant). Subsequently,
+the weighted $F_1$ score was calculated individually for each cluster using these assigned labels. 
+The reproduction work presents the computed weighted $F_1$ scores for different methods in Table \ref{tab:tab1},
+while the original work provides them in Table \ref{tab:tab2}. The results indicate that Lasso regression outperforms
+other feature selection methods in efficiently clustering all variants. In contrast to the original work,
+where pure clusters of certain variants were observed with RFF, the reproduction work only observed
+this phenomenon when using fuzzy c-means clustering. Therefore, k-means, k-modes, and fuzzy c-means exhibit better
+generalization across variants when employing Lasso regression as the feature selection method.
+\begin{table}
     \centering
     \caption{Variant-wise $F_1$ (weighted) score for different clustering methods. (Reproduction work)}
     \begin{tabular}{lccccc}
@@ -233,7 +244,8 @@ the $F_1$ score. The experiments are conducted on a Core i7 system with a MacOS 
     \end{tabular}
     \label{tab:tab1}
 \end{table}
-\begin{table}[htbp]
+
+\begin{table}
     \centering
     \caption{Variant-wise $F_1$ (weighted) score for different clustering methods. (Original work)}
     \begin{tabular}{lccccc}
@@ -260,8 +272,48 @@ the $F_1$ score. The experiments are conducted on a Core i7 system with a MacOS 
     \end{tabular}
     \label{tab:tab2}
 \end{table}
-\subsection{Contingency Table}
+
 \subsection{Runtime Comparison}
+After experimenting with various clustering methods and feature selection algorithms on spike sequences,
+it was noted that k-means, k-modes, and fuzzy c-means exhibit superior performance when Lasso regression
+is employed as the feature selection method, as evident from the weighted $F_1$ score. Nevertheless, it is
+crucial to examine the runtime impact of these clustering approaches to assess the trade-off between $F_1$
+score and runtime. To address this, the runtime for different clustering algorithms, both with and without
+feature selection methods, was calculated and is presented in Table \ref{tab:tab3}. The analysis reveals
+that k-modes is notably time-intensive, while k-means boasts the shortest execution time. This behavior
+underscores the efficacy of the k-means algorithm, not only in terms of $F_1$ score but also in terms of
+runtime efficiency.
+\begin{table}
+    \centering
+    \caption{Running time (in seconds) of different clustering methods and feature selection methods.
+    The number of clusters is 5 (Alpha, Beta, Delta, Gamma, and Epsilon).}
+    \begin{tabular}{lcccc}
+        \toprule
+        & \multicolumn{4}{c}{Runtime for Different Feature Selection Methods}\\
+        \cmidrule{2-5}
+        Clustering Methods & No Feature Selection Method & Lasso & Boruta & RFF\\
+        \midrule
+        K-means & 153.211 & 2.029 & 2.353 & 2.802\\
+        \midrule
+        K-modes & N/A & 1485.150 & 1691.053 & 1501.018\\
+        \midrule
+        Fuzzy c-means & N/A & 66.509 & 89.783 & 198.234\\
+        \bottomrule
+    \end{tabular}
+    \label{tab:tab3}
+\end{table}
+
+\section{Conclusion}
+A proposed feature vector representation and a range of feature selection methods were introduced to
+eliminate less significant features, enabling diverse clustering methods to effectively group SARS-CoV-2
+spike protein sequences with high $F_1$ scores. The significance of runtime in clustering coronavirus spike
+sequences was emphasized, with the k-means algorithm emerging as capable of both achieving pure clustering
+across all variants and requiring the least runtime. Future work may involve expanding the dataset for
+analysis, exploring additional clustering methods, and applying deep learning to larger datasets for more
+nuanced insights. Another avenue is the exploration of alternative feature vector representations, such as
+those based on minimizers, which can be implemented without sequence alignment. This extension could facilitate
+the application of clustering techniques to study unaligned (even unassembled) sequencing reads of intra-host
+viral populations, providing insights into dynamics at this scale.
 
 \nocite{*}
 % \bibliographystyle{plain}

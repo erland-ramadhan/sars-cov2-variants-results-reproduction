@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.9)  6 JAN 2024 00:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.9)  6 JAN 2024 13:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -292,29 +292,29 @@ Class revtex4-2 Warning: The \footnote command is not legal on the title page; u
 LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
 (Font)              using `OT1/cmss/bx/n' instead on input line 148.
 
-[2] [3] (./MID_BIG_DATA_MINING_2306174936_Erland.bbl
+[2] [3] [4] (./MID_BIG_DATA_MINING_2306174936_Erland.bbl
 Underfull \hbox (badness 6559) in paragraph at lines 73--74
 []\OT1/cmr/m/n/8 G. C. Mc-Don-ald, ``Ridge re-gres-sion,'' WIREs Com-pu-ta-tional Statis-tics \OT1/cmr/bx/n/8 1\OT1/cmr/m/n/8 , 93--100 (2009),
  []
 
-[4]) [5] (./MID_BIG_DATA_MINING_2306174936_Erland.aux)
+[5]) [6] (./MID_BIG_DATA_MINING_2306174936_Erland.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5023 strings out of 476025
- 72074 string characters out of 5790017
- 1879388 words of memory out of 5000000
- 25411 multiletter control sequences out of 15000+600000
+ 5024 strings out of 476025
+ 72083 string characters out of 5790017
+ 1871388 words of memory out of 5000000
+ 25412 multiletter control sequences out of 15000+600000
  527173 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,8n,76p,1090b,341s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 71i,9n,76p,1090b,349s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on MID_BIG_DATA_MINING_2306174936_Erland.pdf (5 pages, 252741 bytes).
+Output written on MID_BIG_DATA_MINING_2306174936_Erland.pdf (6 pages, 256161 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
- 69 compressed objects within 1 object stream
+ 118 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
